@@ -1,0 +1,19 @@
+
+* {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+body {
+    background-color: rgb(11, 0, 40);
+    color: white; /* This ensures text is visible on black background */
+  }
+
+  :root {
+    --green: #3fff26;
+    --lightGreen: #bdffb4;
+    --pink: #ff47c5;
+    --lightPink: #fed3ff;
+
+  }
