@@ -32,7 +32,7 @@ export function createWordLogScale(data) {
   const maxC = Math.max(...counts);
   return scaleLog()
     .domain([minC, maxC])
-    .range([700, 250]);
+    .range([700, 300]);
 }
 
 // Generic function to create a band scale
@@ -47,15 +47,15 @@ function createBandScale(data, rangeValues) {
 
 // Create specialized band scales for selections
 export function createTopBandScale(data) {
-  return createBandScale(data, [200, 0]);
+  return createBandScale(data, [100, 0]);
 }
 
 export function createMiddleBandScale(data) {
-  return createBandScale(data, [300, 100]);
+  return createBandScale(data, [200, 100]);
 }
 
 export function createBottomBandScale(data) {
-  return createBandScale(data, [400, 200]);
+  return createBandScale(data, [300, 200]);
 }
 
 // Generic function to create a color scale with log interpolation
