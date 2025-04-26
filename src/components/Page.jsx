@@ -6,7 +6,7 @@ import CircleLegend from "./CircleLegend";
 import keywords_translation from "../utils/keywords";
 
 /**
- * Component with three main sections a sticky left div, a sticky top div and the data viz chart
+ * Component with three main sections a sticky left div, a sticky top div and the data viz chart (ArchiveChart.jsx)
  */
 
 export default function Page({ data, pageWidth = 3000, pageHeight = 1200 }) {
@@ -51,6 +51,7 @@ export default function Page({ data, pageWidth = 3000, pageHeight = 1200 }) {
     setSelectedKeywordTwo("select keyword #2");
   };
 
+  // Keyword ONE
   const handleKeywordOneChange = (keywordOption) => {
     // Extract just the keyword without translation
     const keyword = keywordOption.includes('(') 
@@ -64,6 +65,7 @@ export default function Page({ data, pageWidth = 3000, pageHeight = 1200 }) {
     }
   };
 
+  // Keyword TWO
   const handleKeywordTwoChange = (keywordOption) => {
     // Extract just the keyword without translation
     const keyword = keywordOption.includes('(') 
@@ -89,7 +91,6 @@ export default function Page({ data, pageWidth = 3000, pageHeight = 1200 }) {
         style={{
           width: "300px",
           height: "100vh",
-          //position: "sticky",
           top: 0,
           left: 0,
           backgroundColor: "rgb(11, 0, 40)",
@@ -148,10 +149,11 @@ export default function Page({ data, pageWidth = 3000, pageHeight = 1200 }) {
             top: 70,           // Intersection text height
             zIndex: 10,
             backgroundColor: "rgb(11, 0, 40,0)",
-            height: "60px", // Fixed height to prevent layout shifts
+            height: "60px",   // Fixed height to prevent layout shifts
             display: "flex",
             alignItems: "left",
-            justifyContent: "center"
+            justifyContent: "center",
+            pointerEvents: "none"
           }}
         >
           {/* Use the IntersectionText component */}

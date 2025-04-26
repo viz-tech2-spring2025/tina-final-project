@@ -11,7 +11,7 @@ export const YearAxis = ({ timeScale, width, height }) => {
   const endYear = maxDate.getFullYear();
   
   for (let year = startYear; year <= endYear; year++) {
-    // Only add year if it's divisible by 2 (to avoid crowding)
+    // Can change this to display only even years by diving by 2
     if (year % 1 === 0) {
       years.push(year);
     }
