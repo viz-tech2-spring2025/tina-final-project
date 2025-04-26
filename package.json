@@ -1,7 +1,8 @@
 {
-  "name": "Coding-Exercise-1",
+  "name": "unfreezing-the-archive",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "d3": "^7.9.0",
+    "gensync": "^1.0.0-beta.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-spring": "^9.7.5"

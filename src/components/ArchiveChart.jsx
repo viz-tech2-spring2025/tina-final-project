@@ -1,5 +1,8 @@
-import React, { useMemo, useState } from "react";
+
+import React, { useMemo, useState, useRef } from "react";
 import Circle from "./Circle";
+import { YearAxis } from "./Axes";
+import Tooltip from "./Tooltip"; // Import the separate Tooltip component
 import { 
   createTimeScale, 
   createWordLogScale, 
@@ -13,29 +16,6 @@ import {
   createDefaultColorScale
 } from "../utils/data-scales";
 
-// Add a Tooltip component if you're using it
-const Tooltip = ({ interactionData }) => {
-  if (!interactionData) return null;
-  
-  return (
-    <div 
-      style={{
-        position: 'absolute',
-        left: interactionData.x + 10,
-        top: interactionData.y + 10,
-        backgroundColor: 'rgba(0,0,0,0.8)',
-        color: 'white',
-        padding: '5px 10px',
-        borderRadius: '4px',
-        fontSize: '12px',
-        pointerEvents: 'none'
-      }}
-    >
-      {interactionData.content}
-    </div>
-  );
-};
-
 export default function ArchiveChart({ 
   data, 
   width, 
@@ -45,6 +25,10 @@ export default function ArchiveChart({
 }) {
   // Add state for hover information
   const [hoverInfo, setHoverInfo] = useState(null);
+  const [isTooltipHovered, setIsTooltipHovered] = useState(false);
+  
+  // Add a timer ref to handle the delay
+  const tooltipTimeoutRef = useRef(null);
   
   const margin = { top: 10, right: 10, bottom: 10, left: 10 };
   
@@ -62,7 +46,7 @@ export default function ArchiveChart({
       }))
       .filter(d => {
         const validDate = d.dateObj instanceof Date && !isNaN(d.dateObj);
-        return validDate && d.dateObj.getFullYear() >= 2006 && d.word_count > 20;
+        return validDate && d.dateObj.getFullYear() >= 2006 && d.word_count > 50;
       });
   }, [data]);
   
@@ -96,20 +80,61 @@ export default function ArchiveChart({
   
   // Handle mouse interactions
   const handleMouseEnter = (event, article) => {
+    // Clear any existing timeout
+    if (tooltipTimeoutRef.current) {
+      clearTimeout(tooltipTimeoutRef.current);
+      tooltipTimeoutRef.current = null;
+    }
+    
+    // Get the mouse position relative to the viewport (not the document)
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    
     setHoverInfo({
-      x: event.clientX,
-      y: event.clientY,
-      content: `${article.title} (${new Date(article.dateObj).toLocaleDateString()}) - ${article.word_count} words`
+      x: mouseX,
+      y: mouseY,
+      article,
+      // Pass the keyword information for proper tooltip display
+      keyword1: highlightKeywordOne,
+      keyword2: highlightKeywordTwo
     });
   };
   
   const handleMouseLeave = () => {
-    setHoverInfo(null);
+    // Only clear hover info if the tooltip isn't being hovered
+    // Adding a short delay to allow mouse to move to tooltip
+    if (!isTooltipHovered) {
+      tooltipTimeoutRef.current = setTimeout(() => {
+        if (!isTooltipHovered) {
+          setHoverInfo(null);
+        }
+      }, 100); // Small delay to allow mouse to move to tooltip
+    }
+  };
+  
+  const handleTooltipMouseEnter = () => {
+    // Clear any pending timeout
+    if (tooltipTimeoutRef.current) {
+      clearTimeout(tooltipTimeoutRef.current);
+      tooltipTimeoutRef.current = null;
+    }
+    setIsTooltipHovered(true);
+  };
+  
+  const handleTooltipMouseLeave = () => {
+    setIsTooltipHovered(false);
+    // When mouse leaves tooltip, clear hover info after a short delay
+    tooltipTimeoutRef.current = setTimeout(() => {
+      setHoverInfo(null);
+    }, 10);
   };
   
   return (
-    <>
+    <div style={{ position: "relative" }}>
       <svg width={width} height={height} className="bg-white">
+        {/* Add the axes */}
+        <YearAxis timeScale={timeScale} width={width} height={height} />
+      
         {/* Data points */}
         {processed.map(d => {
           // Check for keyword matches
@@ -119,28 +144,28 @@ export default function ArchiveChart({
           // Determine circle properties based on keyword matches
           let circleY = wordScale(d.word_count);
           let circleColor = defaultColorScale(d.word_count); 
-          let circleOpacity = 0.6;
+          let circleOpacity = 0.7;
           
           // If highlighting is active, adjust position and appearance
           if (highlightKeywordOne || highlightKeywordTwo) {
             if (hasKeywordOne && hasKeywordTwo) {
               // Article contains both keywords - top band
               circleY = topBandScale(d.word_count);
-              circleColor = topBandColorScale(d.word_count); // Use top band color scale
-              circleOpacity = 0.75;
+              circleColor = topBandColorScale(d.word_count);
+              circleOpacity = 0.8;
             } else if (hasKeywordOne) {
               // Article contains keyword one - middle band
               circleY = middleBandScale(d.word_count);
-              circleColor = middleBandColorScale(d.word_count); // Use middle band color scale
-              circleOpacity = 0.75;
+              circleColor = middleBandColorScale(d.word_count);
+              circleOpacity = 0.8;
             } else if (hasKeywordTwo) {
               // Article contains keyword two - bottom band
               circleY = bottomBandScale(d.word_count);
-              circleColor = bottomBandColorScale(d.word_count); // Use bottom band color scale
-              circleOpacity = 0.75;
+              circleColor = bottomBandColorScale(d.word_count);
+              circleOpacity = 0.8;
             } else {
               // No keywords - dim other articles but keep original position
-              circleOpacity = 0.08;
+              circleOpacity = 0.25;
             }
           }
           
@@ -158,21 +183,13 @@ export default function ArchiveChart({
           );
         })}
       </svg>
-      {/* Tooltip */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width,
-          height,
-          pointerEvents: "none",
-        }}
-      >
-        <Tooltip interactionData={hoverInfo} />
-      </div>
-    </>
+      
+      {/* Tooltip container */}
+      <Tooltip 
+        interactionData={hoverInfo} 
+        onTooltipMouseEnter={handleTooltipMouseEnter}
+        onTooltipMouseLeave={handleTooltipMouseLeave}
+      />
+    </div>
   );
 }
-
-

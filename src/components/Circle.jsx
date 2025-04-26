@@ -21,9 +21,9 @@ export default function Circle({
       opacity: opacity
     },
     config: { 
-      mass: 5,
-      tension: 160, 
-      friction: 20 
+      mass: 10,
+      tension: 200, 
+      friction: 40 
     }
   });
 

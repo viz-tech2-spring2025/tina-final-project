@@ -9,7 +9,7 @@
 * {
   font-family: "Josefin Slab", serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 200;
   font-style: normal;
 }
 
@@ -63,6 +63,7 @@ video.video-background {
   text-align: left;
   color: white;
   max-width: 1000px;
+  min-width: 800px;
 }
 
 .overlay h1 {
@@ -112,4 +113,14 @@ video.video-background {
 
 .round-button:hover {
   background-color: #ddd;
+}
+
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

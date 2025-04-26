@@ -2,12 +2,12 @@
 * {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
-    text-align: center;
+    text-align: left;
   }
   
 body {
     background-color: rgb(11, 0, 40);
-    color: white; /* This ensures text is visible on black background */
+    color: white;
   }
 
   :root {
@@ -16,4 +16,13 @@ body {
     --pink: #ff47c5;
     --lightPink: #fed3ff;
 
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }

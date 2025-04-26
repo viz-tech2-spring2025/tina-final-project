@@ -22,7 +22,7 @@ export function createRadiusScale(data) {
   const maxC = Math.max(...counts);
   return scaleSqrt()
     .domain([minC, maxC])
-    .range([2, 10]);
+    .range([1.5, 6]);
 }
 
 // Y axis - Word count on log scale
@@ -32,7 +32,7 @@ export function createWordLogScale(data) {
   const maxC = Math.max(...counts);
   return scaleLog()
     .domain([minC, maxC])
-    .range([700, 300]);
+    .range([700, 350]);
 }
 
 // Generic function to create a band scale
@@ -47,15 +47,15 @@ function createBandScale(data, rangeValues) {
 
 // Create specialized band scales for selections
 export function createTopBandScale(data) {
-  return createBandScale(data, [100, 0]);
+  return createBandScale(data, [150, 50]);
 }
 
 export function createMiddleBandScale(data) {
-  return createBandScale(data, [200, 100]);
+  return createBandScale(data, [250, 150]);
 }
 
 export function createBottomBandScale(data) {
-  return createBandScale(data, [300, 200]);
+  return createBandScale(data, [350, 250]);
 }
 
 // Generic function to create a color scale with log interpolation
@@ -87,7 +87,7 @@ export function createTopBandColorScale(data) {
 }
 
 export function createMiddleBandColorScale(data) {
-  return createColorScale(data, '--green', '--pink' );
+  return createColorScale(data, '--lightGreen', '--green' );
 }
 
 export function createBottomBandColorScale(data) {

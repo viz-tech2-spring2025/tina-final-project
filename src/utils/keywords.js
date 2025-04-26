@@ -5,13 +5,13 @@ const keywords_translation = {
     'familie': 'family',
     'kjærlighet': 'love (noun)',
     'elsker': 'love (verb)',
-    'ressurs': 'resource',
+    'ressurs': 'resources',
     'økonomi': 'economy',
     'isbjørn': 'polar bear',
     'isbree': 'glacier',
     'bolig': 'housing/residence',
     'permafrost': 'permafrost',
-    'strømforsyning': 'power/electricity supply',
+    'strømforsyning': 'power/electricity',
     'forsk': 'research',
     'fornorsk': 'Norwegianize'
 };
