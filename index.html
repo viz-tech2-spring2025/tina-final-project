@@ -10,14 +10,32 @@
       </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unfreezing the Archive</title>
+  
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+  
+  
     <link rel="stylesheet" crossorigin href="/tina-final-project/assets/index-FiDutDkO.css">
   </head>
 
   <body>
     <!-- Body: Navigation-->
     <div class="nav-bar">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
+      <a href="#/">Home</a>
+      <a href="#/about">About</a>
     </div>
   
     <video class="video-background" autoplay muted loop playsinline>
@@ -52,7 +70,7 @@
     </div>
 
     <!--Body: Button-->
-    <a href="archive.html" class="round-button" title="Go to next page">
+    <a href="#/archive.html" class="round-button" title="Go to next page">
       ➜
     </a>
   </body>
