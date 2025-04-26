@@ -104,8 +104,8 @@ export default function Page({ data, pageWidth = 3000, pageHeight = 1200 }) {
       >
         {/* Navigation */}
         <div class="nav-bar">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
+        <a href="#/">Home</a>
+        <a href="#/about">About</a>
         </div>
         <p style={{
           position: "absolute",
