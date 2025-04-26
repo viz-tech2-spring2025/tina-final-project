@@ -28,33 +28,34 @@ The dataset comprises over 16,000 articles in Norwegian from Svalbardposten's di
 - **HTML/CSS** - Web structure and styling
 
 ## Project Structure
-unfreezing_thearchive/
-├── public/              # Public assets
-│   └── data/            # CSV data files
-├── src/                 # Source code
-│   ├── assets/          # Static assets
-│   │   └── northernlights-adobe-77917007.mov  # Background video
-│   ├── components/      # React components
-│   │   ├── ArchiveChart.jsx     # Main data visualization chart
-│   │   ├── Axes.jsx             # Chart axes
-│   │   ├── Circle.jsx           # Circle elements for articles
-│   │   ├── CircleLegend.jsx     # Legend component
-│   │   ├── Filter.jsx           # Keyword filtering controls
-│   │   ├── IntersectionText.jsx # Text for keyword intersections
-│   │   ├── Page.jsx             # Main page layout
-│   │   └── Tooltip.jsx          # Tooltip for article information
-│   ├── utils/           # Utility functions
-│   │   ├── data-scales.js  # D3 scaling functions
-│   │   └── keywords.js     # Keyword translations
-│   ├── main.jsx         # Application entry point
-│   ├── App.jsx          # Main application component
-│   └── styles.css       # Global styles
-├── index.html           # HTML entry point
-├── about.html           # About page
-├── archive.html         # Archive visualization page
-├── package.json         # Project dependencies
-├── vite.config.js       # Vite configuration
-└── README.md            # Project documentation
+## Project Structure
+
+- `public/` - Public assets
+  - `data/` - CSV data files
+- `src/` - Source code
+  - `assets/` - Static assets
+    - `northernlights-adobe-77917007.mov` - Background video
+  - `components/` - React components
+    - `ArchiveChart.jsx` - Main data visualization chart
+    - `Axes.jsx` - Chart axes
+    - `Circle.jsx` - Circle elements for articles
+    - `CircleLegend.jsx` - Legend component
+    - `Filter.jsx` - Keyword filtering controls
+    - `IntersectionText.jsx` - Text for keyword intersections
+    - `Page.jsx` - Main page layout
+    - `Tooltip.jsx` - Tooltip for article information
+  - `utils/` - Utility functions
+    - `data-scales.js` - D3 scaling functions
+    - `keywords.js` - Keyword translations
+  - `main.jsx` - Application entry point
+  - `App.jsx` - Main application component
+  - `styles.css` - Global styles
+- `index.html` - HTML entry point
+- `about.html` - About page
+- `archive.html` - Archive visualization page
+- `package.json` - Project dependencies
+- `vite.config.js` - Vite configuration
+- `README.md` - Project documentation
 
 ## Installation and Setup
 
@@ -75,7 +76,7 @@ unfreezing_thearchive/
 
 ```
 npm install
-or
+# or
 yarn install
 ```
 
@@ -83,7 +84,7 @@ yarn install
 
 ```
 npm run dev
-or
+# or
 yarn dev
 ```
 
